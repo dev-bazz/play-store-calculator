@@ -4,6 +4,9 @@
     "web": {
       "bundler": "metro"
     },
+    "androidNavigationBar": {
+      "visible": "leanback"
+    },
     "name": "play-store-calculator",
     "slug": "play-store-calculator"
   }

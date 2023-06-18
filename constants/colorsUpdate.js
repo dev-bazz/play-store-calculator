@@ -1,13 +1,9 @@
 export const COLORS = {
 	neutral: {
-		black_b: "#22252D",
+		black_b: "#22252E",
 		white: "#Fff",
-		light_gery: "#F2F5F5",
-		black: "#282B33",
-		black_light: "#2A2D37",
+		light_gery: "#CCCCCC",
+		black_light: "#2A2C38",
 	},
-	active: {
-		cyna: "#4DBFAF",
-		pink: "#D86F6E",
-	},
+	active: "#F2D492",
 };
