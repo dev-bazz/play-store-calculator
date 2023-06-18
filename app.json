@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "play-store-calculator",
+    "slug": "play-store-calculator"
+  }
+}
