@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity } from "react-native";
+import React from "react";
 
-export function Button() {
-  return (
-    <View>
-      <Text>Button</Text>
-    </View>
-  )
+import { styles } from "./styles";
+
+export function Button({ value }) {
+	return (
+		<TouchableOpacity style={styles.button}>
+			<Text style={styles.text}>{value}</Text>
+		</TouchableOpacity>
+	);
 }

@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 import { COLORS, styles } from "../constants";
 import { StatusBar } from "expo-status-bar";
+import { Button, Row } from "../components";
 
 export default function index() {
 	return (
@@ -37,7 +38,15 @@ export default function index() {
 					borderTopRightRadius: 30,
 					borderTopLeftRadius: 30,
 					paddingHorizontal: 20,
-				}}></View>
+					paddingTop: 38,
+				}}>
+				<Row>
+					<Button value={"00"} />
+					<Button value={"AC"} />
+					<Button value={"%"} />
+					<Button value={"9"} />
+				</Row>
+			</View>
 			<StatusBar
 				style="auto"
 				hidden={true}
