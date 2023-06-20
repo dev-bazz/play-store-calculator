@@ -1,6 +1,23 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../constants";
 
+const base_button = {
+	color: COLORS.neutral.white,
+	backgroundColor: COLORS.neutral.black_b,
+	paddingHorizontal: 4,
+	borderRadius: 8,
+	paddingVertical: 4,
+	shadowColor: "#000",
+	shadowOffset: { width: 0, height: -2 },
+	shadowOpacity: 0.24,
+	shadowRadius: 6,
+	elevation: 3,
+	width: 74,
+	height: 74,
+	justifyContent: "center",
+	alignItems: "center",
+};
+
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -17,19 +34,18 @@ export const styles = StyleSheet.create({
 	},
 
 	button: {
-		color: COLORS.neutral.white,
-		backgroundColor: COLORS.neutral.black_b,
-		paddingHorizontal: 29,
-		borderRadius: 8,
-		paddingVertical: 26,
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: -2 },
-		shadowOpacity: 0.24,
-		shadowRadius: 6,
-		elevation: 3,
+		...base_button,
 	},
 	text: {
 		color: COLORS.neutral.white,
+		fontSize: 20,
+	},
+	text_black: {
+		color: COLORS.neutral.black_b,
 		fontSize: 16,
+	},
+	button_secondary: {
+		...base_button,
+		backgroundColor: COLORS.active,
 	},
 });

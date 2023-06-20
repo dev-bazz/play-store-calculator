@@ -5,5 +5,5 @@ export const COLORS = {
 		light_gery: "#CCCCCC",
 		black_light: "#2A2C38",
 	},
-	active: "#F2D492",
+	active: "#f2d492",
 };
