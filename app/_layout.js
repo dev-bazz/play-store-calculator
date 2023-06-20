@@ -7,7 +7,8 @@ const Layout = () => {
 				name="index"
 				options={{
 					headerTitle: "Calculator",
-					// headerShown: false,
+
+					headerShown: false,
 
 					headerTitleAlign: "center",
 				}}

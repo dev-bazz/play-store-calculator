@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 import { COLORS, styles } from "../constants";
 import { StatusBar } from "expo-status-bar";
-import { Button, Row, Icons } from "../components";
+import { Button, Row, Icons, Theme } from "../components";
 
 export default function index() {
 	return (
@@ -13,7 +13,9 @@ export default function index() {
 					paddingHorizontal: 20,
 					justifyContent: "flex-end",
 					alignItems: "flex-end",
+					position: "relative",
 				}}>
+				<Theme />
 				<Text
 					style={{
 						color: COLORS.neutral.white,
@@ -38,8 +40,8 @@ export default function index() {
 					borderTopRightRadius: 30,
 					borderTopLeftRadius: 30,
 					paddingHorizontal: 20,
-					paddingTop: 24,
-					paddingBottom: 28,
+					paddingTop: 32,
+					paddingBottom: 0,
 					rowGap: 14,
 				}}>
 				<Row>

@@ -3,3 +3,4 @@ export * from "./Row";
 export * from "./Result";
 export * from "./schemeSwitch";
 export * from "./Icons";
+export * from "./Theme";

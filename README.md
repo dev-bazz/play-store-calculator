@@ -1,3 +1,3 @@
-# Playstore Calculator
+# PlayStore Calculator
 
 ![Alt text](calculator.png)
