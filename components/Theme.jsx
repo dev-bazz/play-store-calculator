@@ -1,10 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../constants";
 import { G, Path, ClipPath, Defs, Svg } from "react-native-svg";
+import { useTheme } from "../hook";
 
 export function Theme() {
+	const { theme, setTheme } = useTheme();
+
+	console.debug("🪲 🪲 file: Theme.jsx:10 :", theme);
+
 	return (
 		<View
 			style={{
@@ -21,14 +25,14 @@ export function Theme() {
 				paddingVertical: 10,
 				borderRadius: 32,
 			}}>
-			<TouchableOpacity>
+			<Pressable onPress={() => setTheme("light")}>
 				<Svg
 					xmlns="http://www.w3.org/2000/svg"
 					width={32}
 					height={32}
 					fill="none">
 					<G
-						stroke="#A7A7A7"
+						stroke={theme === "light" ? "#fff" : "#A7A7A7"}
 						strokeLinecap="round"
 						strokeLinejoin="round"
 						strokeWidth={2}
@@ -44,15 +48,15 @@ export function Theme() {
 						</ClipPath>
 					</Defs>
 				</Svg>
-			</TouchableOpacity>
-			<TouchableOpacity>
+			</Pressable>
+			<Pressable onPress={() => setTheme("dark")}>
 				<Svg
 					xmlns="http://www.w3.org/2000/svg"
 					width={32}
 					height={32}
 					fill="none">
 					<G
-						stroke="#fff"
+						stroke={theme === "dark" ? "#fff" : "#A7A7A7"}
 						strokeLinecap="round"
 						strokeLinejoin="round"
 						strokeWidth={2}
@@ -68,7 +72,7 @@ export function Theme() {
 						</ClipPath>
 					</Defs>
 				</Svg>
-			</TouchableOpacity>
+			</Pressable>
 		</View>
 	);
 }
