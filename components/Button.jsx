@@ -1,20 +1,40 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
 
 import { styles } from "./styles";
 import { Icons } from "./Icons";
+import { useAppState, useTheme } from "../hook";
+import { COLORS } from "../constants";
 
 export function Button({ value, secondary = false, name }) {
+	const { theme } = useTheme();
+	const {
+		handleClear,
+		handleButtonClick,
+		calculateResult,
+		result,
+		inputs,
+		operator,
+	} = useAppState();
+
+	const bg = () =>
+		theme === "light"
+			? { ...styles.button, backgroundColor: COLORS.neutral.white }
+			: styles.button;
 	return (
-		<TouchableOpacity
-			style={secondary ? styles.button_secondary : styles.button}>
+		<Pressable
+			android_ripple={{ color: "#000" }}
+			onPress={() => {
+				name === "clear" ? handleClear() : handleButtonClick(value);
+			}}
+			style={secondary ? styles.button_secondary : bg()}>
 			{secondary ? (
 				<Icons name={name} />
 			) : (
-				<Text style={secondary ? styles.text_black : styles.text}>
+				<Text style={theme === "light" ? styles.text_black : styles.text_l}>
 					{value}
 				</Text>
 			)}
-		</TouchableOpacity>
+		</Pressable>
 	);
 }

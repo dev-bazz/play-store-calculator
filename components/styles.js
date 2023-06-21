@@ -44,6 +44,10 @@ export const styles = StyleSheet.create({
 		color: COLORS.neutral.black_b,
 		fontSize: 16,
 	},
+	text_l: {
+		color: COLORS.neutral.white,
+		fontSize: 16,
+	},
 	button_secondary: {
 		...base_button,
 		backgroundColor: COLORS.active,

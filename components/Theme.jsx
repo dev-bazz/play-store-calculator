@@ -8,7 +8,10 @@ export function Theme() {
 	const { theme, setTheme } = useTheme();
 
 	console.debug("🪲 🪲 file: Theme.jsx:10 :", theme);
-
+	const bg = () =>
+		theme === "light"
+			? COLORS.neutral.light_gery
+			: COLORS.neutral.black_light;
 	return (
 		<View
 			style={{
@@ -18,7 +21,7 @@ export function Theme() {
 				top: 20,
 				flexDirection: "row",
 				gap: 16,
-				backgroundColor: COLORS.neutral.black_light,
+				backgroundColor: bg(),
 				alignContent: "center",
 				justifyContent: "center",
 				paddingHorizontal: 20,
@@ -32,7 +35,7 @@ export function Theme() {
 					height={32}
 					fill="none">
 					<G
-						stroke={theme === "light" ? "#fff" : "#A7A7A7"}
+						stroke={theme === "light" ? COLORS.neutral.black_b : "#A7A7A7"}
 						strokeLinecap="round"
 						strokeLinejoin="round"
 						strokeWidth={2}
