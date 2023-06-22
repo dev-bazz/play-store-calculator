@@ -7,7 +7,6 @@ import { useTheme } from "../hook";
 export function Theme() {
 	const { theme, setTheme } = useTheme();
 
-	console.debug("🪲 🪲 file: Theme.jsx:10 :", theme);
 	const bg = () =>
 		theme === "light"
 			? COLORS.neutral.light_gery

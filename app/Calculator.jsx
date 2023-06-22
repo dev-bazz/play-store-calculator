@@ -6,21 +6,35 @@ import { Button, Row, Icons, Theme } from "../components";
 import { useAppState, useCalculator, useTheme } from "../hook";
 
 export default function Calculator() {
-	const {
-		handleButtonClick,
-		calculateResult,
-		result,
-		inputs,
-		operator,
-		history,
-	} = useAppState();
+	const { result, firstInputs, secondInputs, operator } = useAppState();
+	console.debug(
+		"🪲 🪲 file: Calculator.jsx:10 🪲 firstInputs:",
+		firstInputs
+	);
 
-	console.debug("🪲 🪲 file: Calculator.jsx:18| inputs:", inputs);
 	const { theme } = useTheme();
 	const bg = () =>
 		theme === "light"
 			? COLORS.neutral.light_gery
 			: COLORS.neutral.black_light;
+	const styleF = {
+		color: COLORS.active,
+		marginBottom: 46,
+		fontSize: 48,
+	};
+	const firstNumberDisplay = () => {
+		if (firstInputs === "") {
+			return <Text style={styleF}>{"0"}</Text>;
+		}
+		if (firstInputs > 0) {
+			return <Text style={styleF}>{firstInputs}</Text>;
+		}
+
+		return firstInputs;
+	};
+
+	const secondNumberDisplay = () =>
+		`${secondInputs} ${operator} ${firstInputs}`;
 	return (
 		<SafeAreaView
 			style={
@@ -43,16 +57,9 @@ export default function Calculator() {
 						marginBottom: 0,
 						fontSize: 24,
 					}}>
-					{history[history.length - 1]}
+					{result ?? firstInputs} {operator}
 				</Text>
-				<Text
-					style={{
-						color: COLORS.active,
-						marginBottom: 46,
-						fontSize: 48,
-					}}>
-					{result}
-				</Text>
+				<View>{firstNumberDisplay()}</View>
 			</View>
 			<View
 				style={{
@@ -109,7 +116,6 @@ export default function Calculator() {
 					<Button
 						name={"clear"}
 						secondary={true}
-						value={"C"}
 					/>
 					<Button value={"0"} />
 					<Button value={"."} />

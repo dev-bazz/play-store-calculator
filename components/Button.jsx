@@ -25,7 +25,11 @@ export function Button({ value, secondary = false, name }) {
 		<Pressable
 			android_ripple={{ color: "#000" }}
 			onPress={() => {
-				name === "clear" ? handleClear() : handleButtonClick(value);
+				name === "clear"
+					? handleClear()
+					: name === "equal"
+					? calculateResult()
+					: handleButtonClick(value);
 			}}
 			style={secondary ? styles.button_secondary : bg()}>
 			{secondary ? (
