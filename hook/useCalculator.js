@@ -28,28 +28,23 @@ export const useCalculator = () => {
 			setContinus(false);
 		} else {
 			setOperator(value);
-			setSecondInputs(firstInputs);
+			setSecondInputs((prev) => firstInputs);
 			setFirstInputs("");
 		}
 	}
 
 	function handleClear() {
-		try {
-			setFirstInputs((prev) => "");
-			setOperator((prev) => "");
-			setResult((pre) => "0");
-			secondInputs((prev) => "");
-
-			setCurrentCalculation("");
-		} catch (error) {
-			console.debug(error);
-		}
+		setFirstInputs((prev) => "");
+		setSecondInputs((prev) => "");
+		setOperator((prev) => "");
+		setResult((pre) => "0");
+		setCurrentCalculation("");
 	}
 	function clear() {
 		try {
-			setFirstInputs((pre) => "");
+			setFirstInputs("");
 			setOperator((pre) => "");
-			secondInputs((pre) => "");
+			setSecondInputs("");
 		} catch (error) {
 			console.debug(error);
 		}
@@ -64,7 +59,6 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
-
 				break;
 
 			default:

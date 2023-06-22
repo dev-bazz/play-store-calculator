@@ -57,7 +57,7 @@ export default function Calculator() {
 						marginBottom: 0,
 						fontSize: 24,
 					}}>
-					{result ?? firstInputs} {operator}
+					{secondInputs} {operator} {firstInputs}
 				</Text>
 				<View>{firstNumberDisplay()}</View>
 			</View>
