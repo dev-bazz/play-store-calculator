@@ -30,11 +30,9 @@ export default function Calculator() {
 			return <Text style={styleF}>{firstInputs}</Text>;
 		}
 
-		return firstInputs;
+		return <Text style={styleF}>{firstInputs}</Text>;
 	};
 
-	const secondNumberDisplay = () =>
-		`${secondInputs} ${operator} ${firstInputs}`;
 	return (
 		<SafeAreaView
 			style={

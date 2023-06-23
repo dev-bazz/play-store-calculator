@@ -17,15 +17,17 @@ export const useCalculator = () => {
 	const [currentCalculation, setCurrentCalculation] = useState("");
 
 	function handleButtonClick(value) {
-		value === "="
-			? calculateResult()
-			: continus && isNaN(value)
-			? setFirstInputs((prev) => "")
-			: ``;
-		continus && setFirstInputs((prev) => "");
+		if (value === "=") return calculateResult();
+
 		if (!isNaN(value) || value === ".") {
 			setFirstInputs((prev) => prev + value);
 			setContinus(false);
+		} else if (operator && result) {
+			console.log("continus");
+
+			setSecondInputs(calculateResult());
+			setOperator(value);
+			setFirstInputs("");
 		} else {
 			setOperator(value);
 			setSecondInputs((prev) => firstInputs);
@@ -40,10 +42,10 @@ export const useCalculator = () => {
 		setResult((pre) => "0");
 		setCurrentCalculation("");
 	}
-	function clear() {
+	function clear(prevent) {
 		try {
 			setFirstInputs("");
-			setOperator((pre) => "");
+			continus || setOperator((pre) => "");
 			setSecondInputs("");
 		} catch (error) {
 			console.debug(error);
@@ -59,11 +61,11 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
-				break;
+				return res;
 
 			default:
 				clear();
-				break;
+				return;
 		}
 	}
 	return {
