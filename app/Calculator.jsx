@@ -7,11 +7,6 @@ import { useAppState, useCalculator, useTheme } from "../hook";
 
 export default function Calculator() {
 	const { result, firstInputs, secondInputs, operator } = useAppState();
-	console.debug(
-		"🪲 🪲 file: Calculator.jsx:10 🪲 firstInputs:",
-		firstInputs
-	);
-
 	const { theme } = useTheme();
 	const bg = () =>
 		theme === "light"

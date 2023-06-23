@@ -15,7 +15,12 @@ export function Button({ value, secondary = false, name }) {
 		result,
 		inputs,
 		operator,
+		setReset,
 	} = useAppState();
+	const calc = () => {
+		setReset(true);
+		calculateResult();
+	};
 
 	const bg = () =>
 		theme === "light"
@@ -28,7 +33,7 @@ export function Button({ value, secondary = false, name }) {
 				name === "clear"
 					? handleClear()
 					: name === "equal"
-					? calculateResult()
+					? calc()
 					: handleButtonClick(value);
 			}}
 			style={secondary ? styles.button_secondary : bg()}>

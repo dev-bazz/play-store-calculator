@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { set } from "react-native-reanimated";
 
 const Application = createContext();
 
@@ -7,21 +8,28 @@ export const useCalculator = () => {
 	const [secondInputs, setSecondInputs] = useState("");
 	const [continus, setContinus] = useState(false);
 
-	console.debug(
-		"🪲 🪲 file: useCalculator.js:21 🪲 useCalculator 🪲 firstInputs:",
-		firstInputs
-	);
-
 	const [operator, setOperator] = useState("");
 	const [result, setResult] = useState("0");
 	const [currentCalculation, setCurrentCalculation] = useState("");
+	const [reset, setReset] = useState(false);
+
+	useEffect(() => {
+		firstInputs == false && setFirstInputs("");
+	}, [firstInputs]);
 
 	function handleButtonClick(value) {
-		if (value === "=") return calculateResult();
+		// if (value === "==") {
+		// 	setReset(true);
+		// 	console.debug("🪲 🪲 file: useCalculator.js:14 🪲 reset:", reset);
+		// 	calculateResult();
+		// }
 
 		if (!isNaN(value) || value === ".") {
+			reset && clear();
 			setFirstInputs((prev) => prev + value);
+
 			setContinus(false);
+			setReset(false);
 		} else if (operator && result) {
 			console.log("continus");
 
@@ -77,6 +85,7 @@ export const useCalculator = () => {
 		handleClear,
 		firstInputs,
 		secondInputs,
+		setReset,
 	};
 };
 
