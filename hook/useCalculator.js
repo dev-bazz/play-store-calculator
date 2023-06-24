@@ -18,12 +18,6 @@ export const useCalculator = () => {
 	}, [firstInputs]);
 
 	function handleButtonClick(value) {
-		// if (value === "==") {
-		// 	setReset(true);
-		// 	console.debug("🪲 🪲 file: useCalculator.js:14 🪲 reset:", reset);
-		// 	calculateResult();
-		// }
-
 		if (!isNaN(value) || value === ".") {
 			reset && clear();
 			setFirstInputs((prev) => prev + value);
@@ -31,8 +25,6 @@ export const useCalculator = () => {
 			setContinus(false);
 			setReset(false);
 		} else if (operator && result) {
-			console.log("continus");
-
 			setSecondInputs(calculateResult());
 			setOperator(value);
 			setFirstInputs("");
