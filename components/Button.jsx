@@ -9,17 +9,29 @@ import { COLORS } from "../constants";
 export function Button({ value, secondary = false, name }) {
 	const { theme } = useTheme();
 	const {
-		handleClear,
 		handleButtonClick,
-		calculateResult,
 		result,
-		inputs,
 		operator,
+		calculateResult,
+		currentCalculation,
+		handleClear,
+		firstInputs,
+		secondInputs,
 		setReset,
+		setFirstInputs,
 	} = useAppState();
 	const calc = () => {
 		setReset(true);
 		calculateResult();
+	};
+
+	const clearLastInteger = () => {
+		if (firstInputs) {
+			setFirstInputs((pre) => pre.slice(0, -1));
+			console.debug("🪲 🪲 file: Button.jsx:26 🪲 firstInputs:", firstInputs);
+		} else {
+			setFirstInputs("");
+		}
 	};
 
 	const bg = () =>
@@ -34,6 +46,8 @@ export function Button({ value, secondary = false, name }) {
 					? handleClear()
 					: name === "equal"
 					? calc()
+					: name == "back"
+					? clearLastInteger()
 					: handleButtonClick(value);
 			}}
 			style={secondary ? styles.button_secondary : bg()}>

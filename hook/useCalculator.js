@@ -14,14 +14,15 @@ export const useCalculator = () => {
 	const [reset, setReset] = useState(false);
 
 	useEffect(() => {
-		firstInputs == false && setFirstInputs("");
+		if (!firstInputs) {
+			setFirstInputs("");
+		}
 	}, [firstInputs]);
 
 	function handleButtonClick(value) {
 		if (!isNaN(value) || value === ".") {
 			reset && clear();
 			setFirstInputs((prev) => prev + value);
-
 			setContinus(false);
 			setReset(false);
 		} else if (operator && result) {
@@ -53,11 +54,44 @@ export const useCalculator = () => {
 	}
 
 	function calculateResult() {
-		let result = 0;
+		let res = 0;
 		switch (operator) {
 			case "+":
 				clear();
-				const res = Number(firstInputs) + Number(secondInputs);
+				res = Number(firstInputs) + Number(secondInputs);
+				setResult(res);
+				setFirstInputs((prev) => res);
+				setContinus(true);
+				return res;
+
+			case "-":
+				clear();
+				res = Number(firstInputs) - Number(secondInputs);
+				res = Math.abs(res);
+				setResult(res);
+				setFirstInputs((prev) => res);
+				setContinus(true);
+				return res;
+
+			case "*":
+				clear();
+				res = Number(firstInputs) * Number(secondInputs);
+				setResult(res);
+				setFirstInputs((prev) => res);
+				setContinus(true);
+				return res;
+
+			case "/":
+				clear();
+				res = Number(firstInputs) / Number(secondInputs);
+				setResult(res);
+				setFirstInputs((prev) => res);
+				setContinus(true);
+				return res;
+
+			case "%":
+				clear();
+				res = Number(secondInputs) / 100;
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
@@ -78,15 +112,21 @@ export const useCalculator = () => {
 		firstInputs,
 		secondInputs,
 		setReset,
+		setFirstInputs,
 	};
 };
 
 export function AppState({ children }) {
 	// console.log(useCalculator());
+	let state = "";
+	try {
+		state = useCalculator();
+	} catch (error) {
+		console.debug("🪲 🪲 file: useCalculator.js:133 🪲 error:", error);
+		console.debug("🪲 🪲 file: useCalculator.js:131 🪲 state:", state);
+	}
 	return (
-		<Application.Provider value={useCalculator()}>
-			{children}
-		</Application.Provider>
+		<Application.Provider value={state}>{children}</Application.Provider>
 	);
 }
 

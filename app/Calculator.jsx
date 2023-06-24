@@ -1,13 +1,14 @@
 import { View, Text, SafeAreaView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { COLORS, styles } from "../constants";
 import { StatusBar } from "expo-status-bar";
 import { Button, Row, Icons, Theme } from "../components";
 import { useAppState, useCalculator, useTheme } from "../hook";
 
 export default function Calculator() {
-	const { result, firstInputs, secondInputs, operator } = useAppState();
+	const { firstInputs, secondInputs, operator } = useAppState();
 	const { theme } = useTheme();
+	let displayFont = 0;
 	const bg = () =>
 		theme === "light"
 			? COLORS.neutral.light_gery
@@ -17,15 +18,79 @@ export default function Calculator() {
 		marginBottom: 46,
 		fontSize: 48,
 	};
+	useEffect(() => {
+		function getFont() {
+			return firstInputs.length;
+		}
+		displayFont = getFont();
+	}, [firstInputs, secondInputs]);
 	const firstNumberDisplay = () => {
 		if (firstInputs === "") {
 			return <Text style={styleF}>{"0"}</Text>;
 		}
-		if (firstInputs > 0) {
-			return <Text style={styleF}>{firstInputs}</Text>;
+		if (firstInputs.length >= 10) {
+			return (
+				<Text style={[styleF, { fontSize: 42 - firstInputs.length }]}>
+					{firstInputs}
+				</Text>
+			);
+		}
+		if (firstInputs.length > 0) {
+			return <Text style={[styleF]}>{firstInputs}</Text>;
 		}
 
 		return <Text style={styleF}>{firstInputs}</Text>;
+	};
+
+	const secondNumberDisplay = () => {
+		if (secondInputs.length >= 10) {
+			return (
+				<Text
+					style={
+						theme == "dark"
+							? historyFontStyle
+							: [
+									historyFontStyle,
+									{
+										color: COLORS.neutral.black_b,
+										fontSize: 42 - secondInputs.length,
+									},
+							  ]
+					}>
+					{secondInputs} {operator} {firstInputs}
+				</Text>
+			);
+		}
+
+		if (secondInputs.length > 0) {
+			return (
+				<Text
+					style={
+						theme == "dark"
+							? historyFontStyle
+							: [historyFontStyle, { color: COLORS.neutral.black_b }]
+					}>
+					{secondInputs} {operator} {firstInputs}
+				</Text>
+			);
+		}
+
+		return (
+			<Text
+				style={
+					theme == "dark"
+						? historyFontStyle
+						: [historyFontStyle, { color: COLORS.neutral.black_b }]
+				}>
+				{secondInputs} {operator} {firstInputs}
+			</Text>
+		);
+	};
+
+	const historyFontStyle = {
+		color: COLORS.neutral.white,
+		marginBottom: 0,
+		fontSize: 24,
 	};
 
 	return (
@@ -44,14 +109,7 @@ export default function Calculator() {
 					position: "relative",
 				}}>
 				<Theme />
-				<Text
-					style={{
-						color: COLORS.neutral.white,
-						marginBottom: 0,
-						fontSize: 24,
-					}}>
-					{secondInputs} {operator} {firstInputs}
-				</Text>
+				<View>{secondNumberDisplay()}</View>
 				<View>{firstNumberDisplay()}</View>
 			</View>
 			<View
@@ -67,7 +125,10 @@ export default function Calculator() {
 				}}>
 				<Row>
 					<Button value={"00"} />
-					<Button value={"AC"} />
+					<Button
+						value={"Clear"}
+						name={"clear"}
+					/>
 					<Button value={"%"} />
 					<Button
 						name={"divide"}
@@ -107,8 +168,9 @@ export default function Calculator() {
 				</Row>
 				<Row>
 					<Button
-						name={"clear"}
+						name={"back"}
 						secondary={true}
+						value={"←"}
 					/>
 					<Button value={"0"} />
 					<Button value={"."} />

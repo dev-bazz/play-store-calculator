@@ -161,6 +161,30 @@ export function Icons({ name }) {
 					</Defs>
 				</Svg>
 			);
+
+		case "back":
+			return (
+				<Svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={32}
+					height={33}
+					fill="none">
+					<G clipPath="url(#a)">
+						<Path
+							fill="#282B34"
+							d="M27 5.5H8.566a2.015 2.015 0 0 0-1.715.971l-5.708 9.514a1 1 0 0 0 0 1.03l5.708 9.514a2.013 2.013 0 0 0 1.715.971H27a2 2 0 0 0 2-2v-18a2 2 0 0 0-2-2Zm-6.293 13.293a1 1 0 0 1-1.415 1.415L17 17.913l-2.294 2.293a1 1 0 0 1-1.413-1.415l2.293-2.292-2.293-2.293a1 1 0 0 1 1.413-1.415L17 15.087l2.293-2.293a1 1 0 0 1 1.415 1.415L18.413 16.5l2.293 2.293Z"
+						/>
+					</G>
+					<Defs>
+						<ClipPath id="a">
+							<Path
+								fill="#fff"
+								d="M0 .5h32v32H0z"
+							/>
+						</ClipPath>
+					</Defs>
+				</Svg>
+			);
 		default:
 			return <Text>No {name}</Text>;
 	}
