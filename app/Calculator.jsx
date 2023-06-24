@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { Button, Row, Icons, Theme } from "../components";
 import { useAppState, useCalculator, useTheme } from "../hook";
 
-export default function Calculator() {
+export default function Calculator({ layout }) {
 	const { firstInputs, secondInputs, operator } = useAppState();
 	const { theme } = useTheme();
 	let displayFont = 0;
@@ -99,7 +99,8 @@ export default function Calculator() {
 				theme === "dark"
 					? styles.container
 					: [styles.container, { backgroundColor: COLORS.neutral.white }]
-			}>
+			}
+			onLayout={layout}>
 			<View
 				style={{
 					flex: 1,

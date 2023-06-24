@@ -21,7 +21,7 @@ export const useCalculator = () => {
 
 	function handleButtonClick(value) {
 		if (!isNaN(value) || value === ".") {
-			reset && clear();
+			if (reset && !secondInputs) clear();
 			setFirstInputs((prev) => prev + value);
 			setContinus(false);
 			setReset(false);
@@ -44,13 +44,9 @@ export const useCalculator = () => {
 		setCurrentCalculation("");
 	}
 	function clear(prevent) {
-		try {
-			setFirstInputs("");
-			continus || setOperator((pre) => "");
-			setSecondInputs("");
-		} catch (error) {
-			console.debug(error);
-		}
+		reset && setFirstInputs("");
+		continus || setOperator((pre) => "");
+		setSecondInputs("");
 	}
 
 	function calculateResult() {
@@ -62,6 +58,7 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
+				setReset(true);
 				return res;
 
 			case "-":
@@ -71,6 +68,7 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
+				setReset(true);
 				return res;
 
 			case "*":
@@ -79,6 +77,7 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
+				setReset(true);
 				return res;
 
 			case "/":
@@ -87,14 +86,7 @@ export const useCalculator = () => {
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);
-				return res;
-
-			case "%":
-				clear();
-				res = Number(secondInputs) / 100;
-				setResult(res);
-				setFirstInputs((prev) => res);
-				setContinus(true);
+				setReset(true);
 				return res;
 
 			default:
@@ -113,6 +105,13 @@ export const useCalculator = () => {
 		secondInputs,
 		setReset,
 		setFirstInputs,
+		setContinus,
+		setOperator,
+		setResult,
+		setCurrentCalculation,
+		clear,
+		continus,
+		reset,
 	};
 };
 

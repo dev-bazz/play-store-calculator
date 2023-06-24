@@ -7,6 +7,7 @@ import { useAppState, useTheme } from "../hook";
 import { COLORS } from "../constants";
 
 export function Button({ value, secondary = false, name }) {
+	const [equal, setEqual] = React.useState(false);
 	const { theme } = useTheme();
 	const {
 		handleButtonClick,
@@ -19,6 +20,10 @@ export function Button({ value, secondary = false, name }) {
 		secondInputs,
 		setReset,
 		setFirstInputs,
+		setResult,
+		setContinus,
+		clear,
+		reset,
 	} = useAppState();
 	const calc = () => {
 		setReset(true);
@@ -26,6 +31,7 @@ export function Button({ value, secondary = false, name }) {
 	};
 
 	const clearLastInteger = () => {
+		if (reset) return handleClear();
 		if (firstInputs) {
 			setFirstInputs((pre) => pre.slice(0, -1));
 			console.debug("🪲 🪲 file: Button.jsx:26 🪲 firstInputs:", firstInputs);
@@ -34,6 +40,16 @@ export function Button({ value, secondary = false, name }) {
 		}
 	};
 
+	const percentage = () => {
+		let res = 0;
+		if (!firstInputs) return;
+		res = Number(firstInputs) / 100;
+		setResult(res);
+		setFirstInputs((prev) => res);
+		setContinus(true);
+		setReset(true);
+		return res;
+	};
 	const bg = () =>
 		theme === "light"
 			? { ...styles.button, backgroundColor: COLORS.neutral.white }
@@ -48,6 +64,8 @@ export function Button({ value, secondary = false, name }) {
 					? calc()
 					: name == "back"
 					? clearLastInteger()
+					: value == "%"
+					? percentage()
 					: handleButtonClick(value);
 			}}
 			style={secondary ? styles.button_secondary : bg()}>
