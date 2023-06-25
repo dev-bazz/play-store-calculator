@@ -34,7 +34,6 @@ export function Button({ value, secondary = false, name }) {
 		if (reset) return handleClear();
 		if (firstInputs) {
 			setFirstInputs((pre) => pre.slice(0, -1));
-			console.debug("🪲 🪲 file: Button.jsx:26 🪲 firstInputs:", firstInputs);
 		} else {
 			setFirstInputs("");
 		}

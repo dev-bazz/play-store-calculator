@@ -6,7 +6,6 @@ import { loadAsync } from "expo-font";
 
 preventAutoHideAsync();
 export default function index() {
-	console.log("hello");
 	const [appIsReady, setAppIsReady] = useState(false);
 
 	useEffect(() => {
