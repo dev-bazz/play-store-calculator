@@ -82,7 +82,7 @@ export const useCalculator = () => {
 
 			case "/":
 				clear();
-				res = Number(firstInputs) / Number(secondInputs);
+				res = (Number(secondInputs) / Number(firstInputs)).toFixed(1);
 				setResult(res);
 				setFirstInputs((prev) => res);
 				setContinus(true);

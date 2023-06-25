@@ -16,6 +16,7 @@ const base_button = {
 	height: 74,
 	justifyContent: "center",
 	alignItems: "center",
+	fontFamily: "Prompt-SemiBold",
 };
 
 export const styles = StyleSheet.create({

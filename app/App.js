@@ -26,20 +26,34 @@ export default function Calculator({ layout }) {
 	}, [firstInputs, secondInputs]);
 	const firstNumberDisplay = () => {
 		if (firstInputs === "") {
-			return <Text style={styleF}>{"0"}</Text>;
+			return (
+				<Text style={[styleF, { fontFamily: "Prompt-SemiBold" }]}>{"0"}</Text>
+			);
 		}
 		if (firstInputs.length >= 10) {
 			return (
-				<Text style={[styleF, { fontSize: 42 - firstInputs.length }]}>
+				<Text
+					style={[
+						styleF,
+						{ fontSize: 42 - firstInputs.length, fontFamily: "Prompt-SemiBold" },
+					]}>
 					{firstInputs}
 				</Text>
 			);
 		}
 		if (firstInputs.length > 0) {
-			return <Text style={[styleF]}>{firstInputs}</Text>;
+			return (
+				<Text style={[styleF, { fontFamily: "Prompt-SemiBold" }]}>
+					{firstInputs}
+				</Text>
+			);
 		}
 
-		return <Text style={styleF}>{firstInputs}</Text>;
+		return (
+			<Text style={[styleF, { fontFamily: "Prompt-SemiBold" }]}>
+				{firstInputs}
+			</Text>
+		);
 	};
 
 	const secondNumberDisplay = () => {

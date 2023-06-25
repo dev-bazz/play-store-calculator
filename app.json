@@ -5,6 +5,33 @@
       "bundler": "metro"
     },
     "name": "play-store-calculator",
-    "slug": "play-store-calculator"
+    "slug": "play-store-calculator",
+    "icon": "./assets/images/MathOperations.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#00000"
+      },
+      "package": "com.bazznavtive.playstorecalculator"
+    },
+    "ios": {
+      "icon": "./assets/images/iosicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3c0e6398-edb5-4df7-9ec5-3c00f5a79760"
+      }
+    }
   }
 }

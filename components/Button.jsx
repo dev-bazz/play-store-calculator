@@ -72,7 +72,12 @@ export function Button({ value, secondary = false, name }) {
 			{secondary ? (
 				<Icons name={name} />
 			) : (
-				<Text style={theme === "light" ? styles.text_black : styles.text_l}>
+				<Text
+					style={
+						theme === "light"
+							? [styles.text_black, { fontFamily: "Prompt-SemiBold" }]
+							: [styles.text_l, { fontFamily: "Prompt-SemiBold" }]
+					}>
 					{value}
 				</Text>
 			)}

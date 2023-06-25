@@ -1,57 +1,53 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AppState, Theme, useAppState, useCalculator } from "../hook";
-import Calculator from "./Calculator";
-import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
-import { Asset } from "expo-asset";
+import Calculator from "./App";
+import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
+import { loadAsync } from "expo-font";
 
-SplashScreen.preventAutoHideAsync();
-
+preventAutoHideAsync();
 export default function index() {
-	// const [loadFonts] = useFonts({
-	// 	"Prompt-Black": require("../assets/fonts/Prompt-Black.ttf"),
-	// 	"Prompt-Bold": require("../assets/fonts/Prompt-Bold.ttf"),
-	// 	"Prompt-Semibold": require("../assets/fonts/Prompt-Semibold.ttf"),
-	// 	"Prompt-Medium": require("../assets/fonts/Prompt-Medium.ttf"),
-	// 	"Prompt-Regular": require("../assets/fonts/Prompt-Regular.ttf"),
-	// 	"Prompt-Light": require("../assets/fonts/Prompt-Light.ttf"),
-	// });
+	console.log("hello");
+	const [appIsReady, setAppIsReady] = useState(false);
 
-	// const onLayoutRootView = useCallback(async () => {
-	// 	if (loadFonts) {
-	// 		await SplashScreen.hideAsync();
-	// 	}
-	// }, [loadFonts]);
+	useEffect(() => {
+		async function prepare() {
+			try {
+				// Pre-load fonts, make any API calls you need to do here
+				await loadAsync({
+					"Prompt-Bold": require("../assets/fonts/Prompt-Bold.ttf"),
+					"Prompt-SemiBold": require("../assets/fonts/Prompt-SemiBold.ttf"),
+				});
+				// Artificially delay for two seconds to simulate a slow loading
+				// experience. Please remove this if you copy and paste the code!
+			} catch (e) {
+				console.warn(e);
+			} finally {
+				// Tell the application to render
+				setAppIsReady(true);
+			}
+		}
 
-	// if (!fontsLoaded) {
-	// 	return null;
-	// }
+		prepare();
+	}, []);
 
-	// const loadFonts = async () => {
-	// 	await Promise.all([
-	// 		Asset.loadAsync([
-	// 			require("./assets/fonts/Prompt-Black.ttf"),
-	// 			require("./assets/fonts/Prompt-Bold.ttf"),
-	// 			require("./assets/fonts/Prompt-Semibold.ttf"),
-	// 			require("./assets/fonts/Prompt-Medium.ttf"),
-	// 			require("./assets/fonts/Prompt-Regular.ttf"),
-	// 			require("./assets/fonts/Prompt-Light.ttf"),
-	// 		]),
-	// 		Font.loadAsync({
-	// 			"Prompt-Black": require("./assets/fonts/Prompt-Black.ttf"),
-	// 			"Prompt-Bold": require("./assets/fonts/Prompt-Bold.ttf"),
-	// 			"Prompt-Semibold": require("./assets/fonts/Prompt-Semibold.ttf"),
-	// 			"Prompt-Medium": require("./assets/fonts/Prompt-Medium.ttf"),
-	// 			"Prompt-Regular": require("./assets/fonts/Prompt-Regular.ttf"),
-	// 			"Prompt-Light": require("./assets/fonts/Prompt-Light.ttf"),
-	// 		}),
-	// 	]);
-	// };
+	const onLayoutRootView = useCallback(async () => {
+		if (appIsReady) {
+			// This tells the splash screen to hide immediately! If we call this after
+			// `setAppIsReady`, then we may see a blank screen while the app is
+			// loading its initial state and rendering its first pixels. So instead,
+			// we hide the splash screen once we know the root view has already
+			// performed layout.
+			await hideAsync();
+		}
+	}, [appIsReady]);
 
+	if (!appIsReady) {
+		return null;
+	}
 	return (
 		<Theme>
 			<AppState>
-				<Calculator layout={() => console.log("layout")} />
+				<Calculator layout={onLayoutRootView} />
 			</AppState>
 		</Theme>
 	);
